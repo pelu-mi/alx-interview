@@ -2,6 +2,7 @@
 """ Module for pascal triangle implementation
 """
 
+
 def pascal_triangle(n):
     """ Simple implementation of pacal triangle
     """
