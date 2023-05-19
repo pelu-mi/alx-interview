@@ -10,10 +10,10 @@ status_codes_dict = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
 total_file_size = 0
 count = 0
 
-try: 
+try:
     for line in sys.stdin:
         log_line = line.split(" ")
-        
+
         if len(log_line) > 4:
             status_code = log_line[-2]
             file_size = int(log_line[-1])
