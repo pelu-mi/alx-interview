@@ -8,7 +8,7 @@ def validUTF8(data):
     """
     count = 0
     for x in data:
-        while x > 256:
+        while x > 256:  # If value is > 256, remove the msb
             x -= 256
         if count == 0:
             if x >> 5 == 0b110:  # Check if the msbs are 110
