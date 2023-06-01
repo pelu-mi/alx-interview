@@ -1,25 +1,27 @@
 #!/usr/bin/node
+// JS file to use request module to get information from Star Wars API
 const request = require('request');
-const API_URL = 'https://swapi-api.hbtn.io/api';
 
 if (process.argv.length > 2) {
-  request(`${API_URL}/films/${process.argv[2]}/`, (err, _, body) => {
-    if (err) {
-      console.log(err);
-    }
-    const charactersURL = JSON.parse(body).characters;
-    const charactersName = charactersURL.map(
+  const StarWarsUrl = 'https://swapi-api.alx-tools.com/api/films/' + process.argv[2];
+
+  request(StarWarsUrl, (error, response, body) => {
+    // Print error if error occured
+    if (error) { console.log(error); }
+
+    // Store array of character urls into variable
+    const json = JSON.parse(body);
+    const charactersURL = json.characters;
+    // Store an array of promises based on each character
+    const namesURL = charactersURL.map(
       url => new Promise((resolve, reject) => {
-        request(url, (promiseErr, __, charactersReqBody) => {
-          if (promiseErr) {
-            reject(promiseErr);
-          }
-          resolve(JSON.parse(charactersReqBody).name);
+        request(url, (err, res, bdy) => {
+          if (err) { reject(err); }
+          resolve(JSON.parse(bdy).name);
         });
       }));
-
-    Promise.all(charactersName)
-      .then(names => console.log(names.join('\n')))
-      .catch(allErr => console.log(allErr));
+    // Resolve all the promises
+    Promise.all(namesURL).then(names => console.log(names.join('\n')))
+      .catch(e => console.log(e));
   });
 }
