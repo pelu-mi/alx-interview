@@ -3,7 +3,6 @@
 const request = require('request');
 
 if (process.argv.length > 2) {
-
   const StarWarsUrl = 'https://swapi-api.alx-tools.com/api/films/' + process.argv[2];
 
   request(StarWarsUrl, (error, response, body) => {
