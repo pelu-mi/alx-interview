@@ -20,7 +20,7 @@ def rotate_2d_matrix(matrix):
     '''
     # Short method
     new_list = list(zip(*matrix[::-1]))
-    new_list = list(map(lambda x : list(x), new_list))
+    new_list = list(map(lambda x: list(x), new_list))
     # Store new list in original matrix
     del matrix[:]
     matrix.extend(new_list)
