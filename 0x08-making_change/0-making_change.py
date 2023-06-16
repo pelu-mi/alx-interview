@@ -7,6 +7,8 @@ def makeChange(coins, total):
     """ Given a list of coins of different values, determine the fewest
         number of coins needed to meet a given amount
     """
+    if total <= 0:
+        return (0)
     count = 0
     change = 0
     coins.sort(reverse=True)
