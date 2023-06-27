@@ -3,32 +3,14 @@
 """
 
 
-def isPrime(num: int) -> bool:
-    """ Check if number is a prime number
-    Returns:
-      - True or False
+def rm_multiples(n_list: list, i: int) -> None:
+    """ Change values of multiples i in n_list to 0
     """
-    if num <= 1:
-        return False
-    for i in range(2, int(num / 2) + 1):
-        if (num % i) == 0:
-            return False
-    else:
-        return True
-
-
-def round_x_n(x: int, n: int) -> bool:
-    """ Execute each round and return true or false
-    Returns:
-      - True if Maria wins
-      - False if Ben wins
-    """
-    n_list = list(range(2, n + 1))
-    # Reduce list to prime numbers only
-    n_list = list(filter(lambda a: isPrime(a), n_list))
-    if len(n_list) < x:
-        x = len(n_list)
-    return False if x % 2 == 0 else True
+    for n in range(2, len(n_list)):
+        try:
+            n_list[n * i] = 0
+        except (ValueError, IndexError):
+            break
 
 
 def isWinner(x, nums):
@@ -40,16 +22,20 @@ def isWinner(x, nums):
     if x < 1 or not nums:
         return None
 
-    maria = 0
-    ben = 0
-    for n in nums:
-        if n == 1:
-            continue
-        if round_x_n(x, n):
-            maria += 1
-        else:
-            ben += 1
+    maria, ben = 0, 0
 
+    isPrime = [1 for x in range(sorted(nums)[-1] + 1)]
+    isPrime[0], isPrime[1] = 0, 0
+    for i in range(2, len(isPrime)):
+        rm_multiples(isPrime, i)
+
+    for i in nums:
+        if sum(isPrime[0:i + 1]) % 2 == 0:
+            ben += 1
+        else:
+            maria += 1
+
+    # Return output
     if maria == ben:
         return None
     return 'Maria' if maria > ben else 'Ben'
