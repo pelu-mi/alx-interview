@@ -28,10 +28,15 @@ def round_x_n(x: int, n: int) -> bool:
     n_list = list(filter(lambda a: isPrime(a), n_list))
     if len(n_list) < x:
         x = len(n_list)
+    return False if x % 2 == 0 else True
+
+
+"""
     if x % 2 == 0:
         return False
     else:
         return True
+    """
 
 
 def isWinner(x, nums):
@@ -41,6 +46,8 @@ def isWinner(x, nums):
     """
     # Handle wrong input
     if x < 1 or not nums:
+        return None
+    if x != len(nums):
         return None
 
     # Loop to decide winner
@@ -53,7 +60,6 @@ def isWinner(x, nums):
         else:
             ben += 1
 
-    # Decide winner based on boolean
     if maria == ben:
         return None
     return 'Maria' if maria > ben else 'Ben'
