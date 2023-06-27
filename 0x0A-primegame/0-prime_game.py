@@ -23,22 +23,9 @@ def round_x_n(x: int, n: int) -> bool:
       - True if Maria wins
       - False if Ben wins
     """
-    win = False
     n_list = list(range(2, n + 1))
+    # Reduce list to prime numbers only
     n_list = list(filter(lambda a: isPrime(a), n_list))
-    '''
-    # for num in n_list:
-        # If number of rounds has been completed, exit loop
-        # if x <= 0:
-        #    break
-        # Find the first prime number in the set
-        # if not isPrime(num):
-        #    continue
-        # Delete all multiples of the prime number
-        # n_list = filter(lambda a: a % num != 0, n_list)
-        # Prepare for next loop
-        # x -= 1
-        # win = not win '''
     if len(n_list) < x:
         x = len(n_list)
     if x % 2 == 0:
@@ -53,7 +40,7 @@ def isWinner(x, nums):
       - Name of the player that wins
     """
     # Handle wrong input
-    if x < 0 or len(nums) < 1:
+    if x < 1 or not nums:
         return None
 
     # Loop to decide winner
@@ -67,9 +54,6 @@ def isWinner(x, nums):
             ben += 1
 
     # Decide winner based on boolean
-    if maria > ben:
-        return "Maria"
-    elif ben > maria:
-        return "Ben"
-    else:
+    if maria == ben:
         return None
+    return 'Maria' if maria > ben else 'Ben'
