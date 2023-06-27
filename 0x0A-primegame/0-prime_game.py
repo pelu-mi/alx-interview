@@ -31,14 +31,6 @@ def round_x_n(x: int, n: int) -> bool:
     return False if x % 2 == 0 else True
 
 
-"""
-    if x % 2 == 0:
-        return False
-    else:
-        return True
-    """
-
-
 def isWinner(x, nums):
     """ Predict the winner between Maria and Ben
     Return:
@@ -47,14 +39,12 @@ def isWinner(x, nums):
     # Handle wrong input
     if x < 1 or not nums:
         return None
-    if x != len(nums):
-        return None
 
-    # Loop to decide winner
     maria = 0
     ben = 0
-
     for n in nums:
+        if n == 1:
+            continue
         if round_x_n(x, n):
             maria += 1
         else:
