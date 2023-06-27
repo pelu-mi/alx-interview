@@ -25,20 +25,26 @@ def round_x_n(x: int, n: int) -> bool:
     """
     win = False
     n_list = list(range(2, n + 1))
-    for num in n_list:
+    n_list = list(filter(lambda a: isPrime(a), n_list))
+    '''
+    # for num in n_list:
         # If number of rounds has been completed, exit loop
-        if x <= 0:
-            break
+        # if x <= 0:
+        #    break
         # Find the first prime number in the set
-        if not isPrime(num):
-            continue
+        # if not isPrime(num):
+        #    continue
         # Delete all multiples of the prime number
-        n_list = filter(lambda a: a % num != 0, n_list)
+        # n_list = filter(lambda a: a % num != 0, n_list)
         # Prepare for next loop
-        x -= 1
-        win = not win
-
-    return win
+        # x -= 1
+        # win = not win '''
+    if len(n_list) < x:
+        x = len(n_list)
+    if x % 2 == 0:
+        return False
+    else:
+        return True
 
 
 def isWinner(x, nums):
